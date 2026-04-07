@@ -101,8 +101,9 @@ async function start() {
   try {
     await connectDB();
 
-    httpServer.listen(env.PORT, () => {
-      console.log(`[Server] AuraGram API running on port ${env.PORT} (${env.NODE_ENV})`);
+    const PORT = process.env.PORT || 5001;
+    httpServer.listen(PORT, () => {
+      console.log(`[Server] AuraGram API running on port ${PORT} (${env.NODE_ENV})`);
     });
 
     // Start BullMQ worker + scheduled jobs
