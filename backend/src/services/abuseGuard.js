@@ -15,6 +15,11 @@ import { RATE_LIMITS, RATE_LIMIT_WINDOW, VELOCITY_LIMIT, BAN_DURATION } from '..
  * @returns {Promise<{ allowed: boolean, reason: string }>}
  */
 export async function checkAbuse({ actorId, targetUserId, action }) {
+  // In development, skip all abuse checks
+  if (process.env.NODE_ENV === 'development') {
+    return { allowed: true, reason: 'dev_bypass' };
+  }
+
   // 1. Self-engagement check
   if (actorId && targetUserId && actorId.toString() === targetUserId.toString()) {
     return { allowed: false, reason: 'self_action' };

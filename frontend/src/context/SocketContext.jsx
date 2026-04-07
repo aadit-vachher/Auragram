@@ -24,7 +24,10 @@ export function SocketProvider({ children }) {
       return;
     }
 
-    const socket = io('/', {
+    // In dev, connect directly to backend — Vite proxy doesn't reliably upgrade WebSocket
+    const SOCKET_URL = import.meta.env.DEV ? 'http://localhost:5001' : '/';
+
+    const socket = io(SOCKET_URL, {
       withCredentials: true,
       auth: { token: accessToken },
       transports: ['websocket', 'polling'],
