@@ -11,44 +11,7 @@ import TierBadge from './TierBadge.jsx';
 import { formatScore, formatRank, formatDelta } from '../utils/formatScore.js';
 import { getTierColors } from '../utils/tierColors.js';
 
-function Sparkline({ history = [], color = '#7c3aed', width = 120, height = 36 }) {
-  if (!history || history.length < 2) return null;
 
-  const scores = history.map((h) => h.score);
-  const min = Math.min(...scores);
-  const max = Math.max(...scores);
-  const range = max - min || 1;
-
-  const points = scores.map((s, i) => {
-    const x = (i / (scores.length - 1)) * width;
-    const y = height - ((s - min) / range) * (height - 4) - 2;
-    return `${x},${y}`;
-  });
-
-  const pathD = `M ${points.join(' L ')}`;
-  const areaD = `M 0,${height} L ${points.join(' L ')} L ${width},${height} Z`;
-
-  return (
-    <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} className="overflow-visible">
-      <defs>
-        <linearGradient id="sparkGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor={color} stopOpacity="0.3" />
-          <stop offset="100%" stopColor={color} stopOpacity="0" />
-        </linearGradient>
-      </defs>
-      <path d={areaD} fill="url(#sparkGrad)" />
-      <path d={pathD} fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-      {/* Latest point dot */}
-      <circle
-        cx={(scores.length - 1) / (scores.length - 1) * width}
-        cy={height - ((scores[scores.length - 1] - min) / range) * (height - 4) - 2}
-        r="3"
-        fill={color}
-        style={{ filter: `drop-shadow(0 0 4px ${color})` }}
-      />
-    </svg>
-  );
-}
 
 export function ScoreWidget({ userId }) {
   const [userData, setUserData] = useState(null);
