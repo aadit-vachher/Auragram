@@ -79,6 +79,14 @@ export default {
             boxShadow: '0 0 20px rgba(57,255,20,0.5), 0 0 40px rgba(57,255,20,0.3)',
             opacity: '0.8'
           },
+        },
+        textShine: {
+          '0%': { backgroundPosition: '200% center' },
+          '100%': { backgroundPosition: '-200% center' },
+        },
+        glazeSweep: {
+          '0%': { transform: 'translateX(-100%) skewX(-15deg)' },
+          '50%, 100%': { transform: 'translateX(200%) skewX(-15deg)' },
         }
       },
       boxShadow: {
