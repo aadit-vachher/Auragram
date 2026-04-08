@@ -19,7 +19,7 @@ function setTokenCookies(res, accessToken, refreshToken) {
     secure: env.NODE_ENV === 'production',
     sameSite: 'lax',
     maxAge: 7 * 24 * 60 * 60 * 1000,
-    path: '/api/auth/refresh',
+
   });
 }
 
