@@ -1,7 +1,7 @@
 // src/controllers/feedController.js
 import Post from '../models/Post.js';
 import { sendSuccess, buildCursorQuery, encodeCursor } from '../utils/helpers.js';
-
+// async function
 export async function getFeed(req, res, next) {
   try {
     const { cursor, limit, category } = req.query;
